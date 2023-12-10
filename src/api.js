@@ -7,12 +7,8 @@ const fetchTodos = async () => {
   return response.data;
 };
 
-const fetchTodo = async (id) => {
-  const response = await axios.get(`https://jsonplaceholder.typicode.com/todos/${id}`);
+export const useTodosQuery = (select) => useQuery({ queryKey: ['todos'], queryFn: () => fetchTodos(), select });
 
-  return response.data;
-};
+export const useTodosCount = () => useTodosQuery((data) => data.length);
 
-export const useTodosQuery = () => useQuery({ queryKey: ['todos'], queryFn: () => fetchTodos() });
-
-export const useTodoQuery = (id) => useQuery({ queryKey: ['todo', { id }], queryFn: () => fetchTodo(id) });
+export const useTodo = (id) => useTodosQuery((data) => data.find((todo) => todo.id === id));

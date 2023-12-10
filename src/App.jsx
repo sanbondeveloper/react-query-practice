@@ -1,21 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
-import TableTodos from './TableTodos';
-import Todo from './Todo';
+import { useTodosQuery } from './api';
 
 const App = () => {
-  return (
-    <StyledWrapper>
-      <TableTodos />
-      <Todo />
-    </StyledWrapper>
-  );
+  const { data: todos } = useTodosQuery();
+
+  console.log(todos);
+
+  return <></>;
 };
 
 export default App;
-
-const StyledWrapper = styled.div`
-  .search-form {
-    margin-bottom: 10px;
-  }
-`;
